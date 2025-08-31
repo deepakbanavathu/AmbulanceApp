@@ -1,45 +1,110 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-#Dependencies
-node_modules/
-jsm
+############################
+# .NET Core API (Backend)  #
+############################
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Build results
+bin/
+obj/
+out/
+artifacts/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
+# Visual Studio / Rider
+.vs/
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
 
-# Visual Studio Code
+# User files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# Publish profiles
+*.pubxml
+*.publishproj
+**/Properties/PublishProfiles/
+
+# Packages
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+!**/packages/build/
+*.tar.gz
+
+# Test results
+*.trx
+*.testresults/
+TestResults/
+*.coverage
+*.coveragexml
+
+# User secrets & config
+secrets.json
+appsettings.Development.json
+.env
+.env.*
+
+# Resharper
+_ReSharper*/
+*.ReSharper
+*.DotSettings.user
+
+# Backup & reports
+*.orig
+*.docstates
+
+###########################
+# Angular App (Frontend)  #
+###########################
+
+#Dependencies
+node_modules/
+
+# Build outputs
+/dist/
+/dist-browser/
+/dist-server/
+/build/
+/out-tsc/
+
+# Angular cache
+.angular/
+.angular/cache/
+
+# Logs
+*.log
+
+# IDE junk
+*.swp
+*.bak
+*.tmp
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+
+# Environment files
+src/environments/*.ts
+
+# Compiled JS/Maps
+*.js
+*.map
 
 # System files
 .DS_Store
