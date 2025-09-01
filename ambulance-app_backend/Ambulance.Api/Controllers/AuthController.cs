@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Ambulance.Api.Interface;
 
 namespace Ambulance.Api.Controllers
 {
@@ -8,10 +9,12 @@ namespace Ambulance.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _config;
+        private readonly IRefreshToken refresh;
 
-        public AuthController(IConfiguration config)
+        public AuthController(IConfiguration config, IRefreshToken _refresh)
         {
             _config = config;
+            refresh = _refresh;
         }
 
         [HttpPost("refresh")]
@@ -22,18 +25,21 @@ namespace Ambulance.Api.Controllers
             var refreshToken = GetRefreshTokenFromDb(request.RefreshToken);
             if (refreshToken == null || refreshToken.IsRevoked || refreshToken.ExpiryDate < DateTime.UtcNow)
             {
-                var jwtSettings = _config.GetSection("Jwt");
-                var newToken = new
-                {
-                    Token = "new_jwt_token",
-                    ExpiresIn = 3600 // 1 hour
-                };
-                return Ok(newToken);
+                return Unauthorized(new { error = "invalid_refresh_token" });
             }
-            else
+
+            var newAccessToken = refresh.GenerateAccessToken(refreshToken.UserId, _config);
+
+            var newRefreshToken = refresh.GenerateRefreshToken();
+            SaveRefreshTokenToDb(refreshToken.UserId, newRefreshToken);
+
+            return Ok(new
             {
-                return Unauthorized(new { Message = "Invalid refresh token" });
-            }
+                access_token = newAccessToken,
+                refresh_token = newRefreshToken
+            });
+
         }
+
     }
 }
