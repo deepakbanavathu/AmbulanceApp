@@ -1,0 +1,9 @@
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.csproj.AssemblyReference.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.AssemblyInfoInputs.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.AssemblyInfo.cs
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.csproj.CoreCompileInputs.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\Ambulance.Api\obj\Debug\net9.0\Ambulance.Api.sourcelink.json

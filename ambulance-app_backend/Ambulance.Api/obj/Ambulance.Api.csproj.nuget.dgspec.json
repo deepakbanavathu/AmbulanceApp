@@ -1,31 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "/Users/deepakbanavathu/AmbulanceApp/ambulance-app_backend/Ambulance.Api/Ambulance.Api.csproj": {}
+    "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\Ambulance.Api\\Ambulance.Api.csproj": {}
   },
   "projects": {
-    "/Users/deepakbanavathu/AmbulanceApp/ambulance-app_backend/Ambulance.Api/Ambulance.Api.csproj": {
+    "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\Ambulance.Api\\Ambulance.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/deepakbanavathu/AmbulanceApp/ambulance-app_backend/Ambulance.Api/Ambulance.Api.csproj",
+        "projectUniqueName": "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\Ambulance.Api\\Ambulance.Api.csproj",
         "projectName": "Ambulance.Api",
-        "projectPath": "/Users/deepakbanavathu/AmbulanceApp/ambulance-app_backend/Ambulance.Api/Ambulance.Api.csproj",
-        "packagesPath": "/Users/deepakbanavathu/.nuget/packages/",
-        "outputPath": "/Users/deepakbanavathu/AmbulanceApp/ambulance-app_backend/Ambulance.Api/obj/",
+        "projectPath": "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\Ambulance.Api\\Ambulance.Api.csproj",
+        "packagesPath": "C:\\Users\\deepak.banavathu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\Ambulance.Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/deepakbanavathu/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\deepak.banavathu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net9.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.306/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -33,12 +38,22 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.9, )"
@@ -71,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.306/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
