@@ -4,6 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambulance.Api", "Ambulance.Api\Ambulance.Api.csproj", "{8ECEE9D6-C0CE-59A1-D63E-958BD7BCDC4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928} = {DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbulanceApp_BussinessLayer", "AmbulanceApp_BussinessLayer\AmbulanceApp_BussinessLayer.csproj", "{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbulanceApp.Models", "AmbulanceApp.Models\AmbulanceApp.Models.csproj", "{536ADB59-73CF-4C0B-BAA7-1149A58187A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +22,19 @@ Global
 		{8ECEE9D6-C0CE-59A1-D63E-958BD7BCDC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ECEE9D6-C0CE-59A1-D63E-958BD7BCDC4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ECEE9D6-C0CE-59A1-D63E-958BD7BCDC4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD3F246F-AF8F-4CBC-8C9E-B1430EB0D928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9DE0655-08A2-4A75-BDC8-1255701C0A97}
 	EndGlobalSection
 EndGlobal

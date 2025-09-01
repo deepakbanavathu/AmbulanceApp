@@ -13,6 +13,15 @@ artifacts/
 # Visual Studio / Rider
 .vs/
 .idea/
+*.lib
+*.ncb
+*.pbd
+*.aps
+*.pch
+*.lik
+*.exp
+*.sbr
+*.res
 
 # User files
 *.user

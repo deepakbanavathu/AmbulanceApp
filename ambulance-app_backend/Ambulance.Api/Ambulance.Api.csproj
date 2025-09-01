@@ -13,4 +13,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AmbulanceApp.Models\AmbulanceApp.Models.csproj" />
+    <ProjectReference Include="..\AmbulanceApp_BussinessLayer\AmbulanceApp_BussinessLayer.csproj" />
+  </ItemGroup>
+
 </Project>

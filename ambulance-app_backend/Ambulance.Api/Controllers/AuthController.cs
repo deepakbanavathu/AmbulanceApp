@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ambulance.Api.Interface;
+using AmbulanceApp_BussinessLayer.Serivces;
+using AmbulanceApp.Models;
 
 namespace Ambulance.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
-    {
-        private readonly IConfiguration _config;
+    {        
         private readonly IRefreshToken refresh;
+        private readonly IJwtToken jwtToken;
 
-        public AuthController(IConfiguration config, IRefreshToken _refresh)
-        {
-            _config = config;
+        public AuthController(IRefreshToken _refresh, IJwtToken jwt)
+        {            
             refresh = _refresh;
+            jwtToken = jwt;
         }
 
         [HttpPost("refresh")]
@@ -28,7 +30,7 @@ namespace Ambulance.Api.Controllers
                 return Unauthorized(new { error = "invalid_refresh_token" });
             }
 
-            var newAccessToken = refresh.GenerateAccessToken(refreshToken.UserId, _config);
+            var newAccessToken = jwtToken.GenerateAccessToken(refreshToken.UserId);
 
             var newRefreshToken = refresh.GenerateRefreshToken();
             SaveRefreshTokenToDb(refreshToken.UserId, newRefreshToken);

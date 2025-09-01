@@ -273,6 +273,29 @@
             "related": ".xml"
           }
         }
+      },
+      "AmbulanceApp.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/AmbulanceApp.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AmbulanceApp.Models.dll": {}
+        }
+      },
+      "AmbulanceApp_BussinessLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "AmbulanceApp.Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AmbulanceApp_BussinessLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AmbulanceApp_BussinessLayer.dll": {}
+        }
       }
     }
   },
@@ -913,10 +936,22 @@
         "system.identitymodel.tokens.jwt.8.14.0.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
+    },
+    "AmbulanceApp.Models/1.0.0": {
+      "type": "project",
+      "path": "../AmbulanceApp.Models/AmbulanceApp.Models.csproj",
+      "msbuildProject": "../AmbulanceApp.Models/AmbulanceApp.Models.csproj"
+    },
+    "AmbulanceApp_BussinessLayer/1.0.0": {
+      "type": "project",
+      "path": "../AmbulanceApp_BussinessLayer/AmbulanceApp_BussinessLayer.csproj",
+      "msbuildProject": "../AmbulanceApp_BussinessLayer/AmbulanceApp_BussinessLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AmbulanceApp.Models >= 1.0.0",
+      "AmbulanceApp_BussinessLayer >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.8",
       "Microsoft.AspNetCore.OpenApi >= 7.0.9",
       "Swashbuckle.AspNetCore >= 6.5.0",
@@ -954,7 +989,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\AmbulanceApp.Models\\AmbulanceApp.Models.csproj": {
+              "projectPath": "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\AmbulanceApp.Models\\AmbulanceApp.Models.csproj"
+            },
+            "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\AmbulanceApp_BussinessLayer\\AmbulanceApp_BussinessLayer.csproj": {
+              "projectPath": "C:\\Users\\deepak.banavathu\\source\\repos\\AmbulanceApp\\ambulance-app_backend\\AmbulanceApp_BussinessLayer\\AmbulanceApp_BussinessLayer.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
