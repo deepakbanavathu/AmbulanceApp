@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AmbulanceApp_BussinessLayer.Serivces
 {
-    internal class RefreshTokenService : IRefreshToken
+    public class RefreshTokenService : IRefreshToken
     {
         private readonly IRedisService _redis;
 
