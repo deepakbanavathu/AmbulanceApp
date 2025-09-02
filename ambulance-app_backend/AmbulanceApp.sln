@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbulanceApp_BussinessLayer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbulanceApp.Models", "AmbulanceApp.Models\AmbulanceApp.Models.csproj", "{536ADB59-73CF-4C0B-BAA7-1149A58187A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbulanceApp_DBContext", "AmbulanceApp_DBContext\AmbulanceApp_DBContext.csproj", "{7D817C18-C00F-4641-A0F6-7408B042147E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{536ADB59-73CF-4C0B-BAA7-1149A58187A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D817C18-C00F-4641-A0F6-7408B042147E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D817C18-C00F-4641-A0F6-7408B042147E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D817C18-C00F-4641-A0F6-7408B042147E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D817C18-C00F-4641-A0F6-7408B042147E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

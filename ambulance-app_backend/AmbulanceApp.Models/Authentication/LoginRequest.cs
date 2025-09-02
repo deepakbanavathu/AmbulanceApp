@@ -1,4 +1,4 @@
-﻿namespace AmbulanceApp.Models
+﻿namespace AmbulanceApp.Models.Authentication
 {
     public class LoginRequest
     {

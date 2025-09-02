@@ -24,8 +24,15 @@ namespace Ambulance.Api.MiddleWear
         public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-            if (token != null)
-                AttachUserToContext(context, token);
+            if (!string.IsNullOrEmpty(token)) { 
+                var result = AttachUserToContext(context, token);
+                if(!result.IsValid)
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    await context.Response.WriteAsync(result.Error ?? "Unauthorized");
+                    return;
+                }
+            }
             await _next(context);
         }
 
@@ -55,7 +62,7 @@ namespace Ambulance.Api.MiddleWear
                 var userId = jwtToken.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value;
                 var role = jwtToken.Claims.First(x => x.Type == ClaimTypes.Role)?.Value;
 
-                context.Items["User"] = new { UserId = userId, Role = role };
+                context.Items["User"] = new CurrentUser { UserId = userId, Role = role };
                 return (true, null);
             }
             catch (SecurityTokenExpiredException)
@@ -71,5 +78,11 @@ namespace Ambulance.Api.MiddleWear
                 throw new UnauthorizedAccessException("unauthorised");
             }
         }
+    }
+
+    public class CurrentUser
+    {
+        public string UserId { get; set; }
+        public string Role { get; set; }
     }
 }

@@ -1,0 +1,6 @@
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.AssemblyInfoInputs.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.AssemblyInfo.cs
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.sourcelink.json
+C:\Users\deepak.banavathu\source\repos\AmbulanceApp\ambulance-app_backend\AmbulanceApp_BussinessLayer\obj\Debug\net9.0\AmbulanceApp_BussinessLayer.csproj.AssemblyReference.cache

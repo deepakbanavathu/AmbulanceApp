@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ambulance.Api\Ambulance.Api.csproj" />
+    <ProjectReference Include="..\AmbulanceApp.Models\AmbulanceApp.Models.csproj" />
+    <ProjectReference Include="..\AmbulanceApp_BussinessLayer\AmbulanceApp_BussinessLayer.csproj" />
+  </ItemGroup>
+
+</Project>
