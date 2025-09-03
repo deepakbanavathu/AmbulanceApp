@@ -4,6 +4,8 @@ using AmbulanceApp_BussinessLayer.Interfaces.Authtication;
 using AmbulanceApp_BussinessLayer.Interfaces.RedishCache;
 using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
 using Microsoft.AspNetCore.Http;
+using AmbulanceApp_DBContext.DBContract;
+using AmbulanceApp_BussinessLayer.Interfaces.SendReceiveOtp;
 
 namespace AmbulanceApp_BussinessLayer.Serivces
 {
@@ -13,12 +15,12 @@ namespace AmbulanceApp_BussinessLayer.Serivces
         private readonly IJwtToken _jwtService;
         private readonly IRefreshToken _refreshTokenService;
         private readonly IRedisService _redisService;
-        private readonly EmailOtpService emailOtpService;
+        private readonly IOtpService _emailOtpService;
 
         public AuthSerivce(IUserRespository users, IJwtToken jwtservice,
-                           IRefreshToken refreshToken, IRedisService redis, EmailOtpService _emailOtpService)
+                           IRefreshToken refreshToken, IRedisService redis, IOtpService emailOtpService)
         {
-            _users = users;
+            _user = users;
             _jwtService = jwtservice;
             _refreshTokenService = refreshToken;
             _redisService = redis;
@@ -43,7 +45,7 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
             await _redisService.RemoveAsync($"otp:phone:{req.Contact}");
 
-            var user = await _users.GetOrCreateByPhoneAsync(req.Contact);
+            var user = await _user.GetOrCreateByPhoneAsync(req.Contact);
 
             var accessToken = _jwtService.GenerateAccessToken(user.Id.ToString(),"User");
 
@@ -55,12 +57,12 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> LoginWithEmailAsync(EmailLoginRequest req, HttpContext context)
         {
-            var user = await _users.GetbyEmailAsync(req.Email);
+            var user = await _user.GetByEmailAsync(req.Email);
             if (user == null)
                 return new AuthResponse { Success = false, Message = "User not registerd" };
 
-            if (!BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
-                return new AuthResponse { Success = false, Message = "invalid credentials" };
+            //if (!BCrypt.Net.BCrypt.Verify(req.Password, user.PasswordHash))
+            //    return new AuthResponse { Success = false, Message = "invalid credentials" };
 
             var accessToken = _jwtService.GenerateAccessToken(user.Id.ToString(), "User");
 
@@ -76,7 +78,7 @@ namespace AmbulanceApp_BussinessLayer.Serivces
             await _redisService.SetAsync($"otp:email:{req.Email}",otp,TimeSpan.FromMinutes(5));
 
             //implement the integrated email service
-            await emailOtpService.SendOtpAsync(req.Email, otp);
+            await _emailOtpService.SendOtpAsync(req.Email, otp);
             return new AuthResponse { Success = true, Message = "Otp sent to email" };
         }
 
@@ -88,7 +90,7 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
             await _redisService.RemoveAsync($"otp:email:{req.Contact}");
 
-            var user = await _users.GetOrCreateByEmailAsync(req.Contact);
+            var user = await _user.GetOrCreateByEmailAsync(req.Contact);
 
             var accessToken = _jwtService.GenerateAccessToken(user.Id.ToString(),"User");
             var refresh = _refreshTokenService.GenerateRefreshToken(user.Id.ToString());

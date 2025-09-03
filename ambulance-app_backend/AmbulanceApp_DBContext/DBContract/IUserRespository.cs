@@ -7,7 +7,7 @@ using AmbulanceApp.Models.UserModel;
 
 namespace AmbulanceApp_DBContext.DBContract
 {
-    internal interface IUserRespository
+    public interface IUserRespository
     {
         Task<User?> GetByEmailAsync(string email);
         Task<User?> GetByPhoneAsync(string phone);

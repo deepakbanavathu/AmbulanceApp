@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ambulance.Api\Ambulance.Api.csproj" />
     <ProjectReference Include="..\AmbulanceApp.Models\AmbulanceApp.Models.csproj" />
   </ItemGroup>
 

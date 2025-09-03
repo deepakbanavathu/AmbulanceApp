@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AmbulanceApp.Models\AmbulanceApp.Models.csproj" />
     <ProjectReference Include="..\AmbulanceApp_BussinessLayer\AmbulanceApp_BussinessLayer.csproj" />
+    <ProjectReference Include="..\AmbulanceApp_DBContext\AmbulanceApp_DBContext.csproj" />
   </ItemGroup>
 
 </Project>

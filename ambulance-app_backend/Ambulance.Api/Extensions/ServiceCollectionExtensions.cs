@@ -1,11 +1,12 @@
 ﻿using Ambulance.Api.Helper;
 using Ambulance.Api.MiddleWear;
-using AmbulanceApp.Models.Authentication;
+using AmbulanceApp_BussinessLayer.Interfaces.Authtication;
 using AmbulanceApp_BussinessLayer.Interfaces.RedishCache;
+using AmbulanceApp_BussinessLayer.Interfaces.SendReceiveOtp;
 using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
 using AmbulanceApp_BussinessLayer.Serivces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.DependencyInjection;
+using AmbulanceApp_DBContext.DBContract;
+using AmbulanceApp_DBContext.Repository;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System.Runtime.CompilerServices;
@@ -22,11 +23,12 @@ namespace Ambulance.Api.Extensions
                 return ConnectionMultiplexer.Connect(connectionString);
             });
 
-            service.AddScoped<IAuthenticationService, AuthenticationService>();
-            service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IAuthenticationServices, AuthSerivce>();
+            service.AddScoped<IUserRespository, UserRepository>();
             service.AddScoped<IJwtToken, JwtTokenCreation>();
             service.AddScoped<IRefreshToken, RefreshTokenService>();
             service.AddScoped<IRedisService, RedisService>();
+            service.AddScoped<IOtpService,EmailOtpService>();
 
             service.AddCors(options =>
             {
@@ -62,6 +64,7 @@ namespace Ambulance.Api.Extensions
                     option.SerializeAsV2 = true;
                 });                        
             }
+            app.UseRouting();
 
             app.UseAuthorization();
 
