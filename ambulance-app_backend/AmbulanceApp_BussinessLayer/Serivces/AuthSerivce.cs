@@ -4,13 +4,6 @@ using AmbulanceApp_BussinessLayer.Interfaces.Authtication;
 using AmbulanceApp_BussinessLayer.Interfaces.RedishCache;
 using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AmbulanceApp_BussinessLayer.Serivces
 {
@@ -20,14 +13,16 @@ namespace AmbulanceApp_BussinessLayer.Serivces
         private readonly IJwtToken _jwtService;
         private readonly IRefreshToken _refreshTokenService;
         private readonly IRedisService _redisService;
+        private readonly EmailOtpService emailOtpService;
 
         public AuthSerivce(IUserRespository users, IJwtToken jwtservice,
-                           IRefreshToken refreshToken, IRedisService redis)
+                           IRefreshToken refreshToken, IRedisService redis, EmailOtpService _emailOtpService)
         {
             _users = users;
             _jwtService = jwtservice;
             _refreshTokenService = refreshToken;
             _redisService = redis;
+            _emailOtpService = emailOtpService;
         }
 
         public async Task<AuthResponse> SendPhoneOtpAsync(PhoneLoginRequest req, HttpContext context)
@@ -81,7 +76,7 @@ namespace AmbulanceApp_BussinessLayer.Serivces
             await _redisService.SetAsync($"otp:email:{req.Email}",otp,TimeSpan.FromMinutes(5));
 
             //implement the integrated email service
-
+            await emailOtpService.SendOtpAsync(req.Email, otp);
             return new AuthResponse { Success = true, Message = "Otp sent to email" };
         }
 
