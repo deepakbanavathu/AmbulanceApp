@@ -5,8 +5,10 @@ using AmbulanceApp_BussinessLayer.Interfaces.RedishCache;
 using AmbulanceApp_BussinessLayer.Interfaces.SendReceiveOtp;
 using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
 using AmbulanceApp_BussinessLayer.Serivces;
+using AmbulanceApp_DBContext.DBContext;
 using AmbulanceApp_DBContext.DBContract;
 using AmbulanceApp_DBContext.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System.Runtime.CompilerServices;
@@ -21,6 +23,11 @@ namespace Ambulance.Api.Extensions
             {
                 var connectionString = config.GetConnectionString("Redis");
                 return ConnectionMultiplexer.Connect(connectionString);
+            });
+
+            service.AddDbContext<AmbulanceAppDBContext>(option =>
+            {
+                option.UseSqlServer(config.GetConnectionString("DefaultConnection"), op => op.CommandTimeout(300));
             });
 
             service.AddScoped<IAuthenticationServices, AuthSerivce>();

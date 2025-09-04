@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AmbulanceApp.Models.UserModel;
+using AmbulanceApp_DBContext.Entities;
 
 namespace AmbulanceApp_DBContext.DBContract
 {
     public interface IUserRespository
     {
-        Task<User?> GetUserById(Guid id, CancellationToken ct = default);
-        Task<User?> GetByEmailAsync(string email);
-        Task<User?> GetByPhoneAsync(string phone);
-        Task<User?> EmailExistsAsync(string email, CancellationToken ct = default);
-        Task<User?> PhoneExistsAsync(string phone, CancellationToken ct = default);
-        Task<User> CreateAsync(User user,CancellationToken ct = default);
-        Task<User> updateAsync(User user,CancellationToken ct = default);
-        Task<User?> GetOrCreateByPhoneAsync(string phone);
-        Task<User?> GetOrCreateByEmailAsync(string email);
-        Task SaveAsync(User user);
+        Task<UserEntity?> GetByIdAsync(Guid id, CancellationToken ct = default);
+        Task<UserEntity?> GetByEmailAsync(string email, CancellationToken ct=default);
+        Task<UserEntity?> GetByPhoneAsync(string phone, CancellationToken ct=default);
+        Task<bool> EmailExistsAsync(string email, CancellationToken ct = default);
+        Task<bool> PhoneExistsAsync(string phone, CancellationToken ct = default);
+        Task CreateAsync(UserEntity user,CancellationToken ct = default);
+        Task UpdateAsync(UserEntity user,CancellationToken ct = default);
+        Task RemoveAsync(UserEntity user,CancellationToken ct = default);
+        Task<UserEntity?> GetOrCreateByPhoneAsync(string phone, CancellationToken ct = default); // Func<UserEntity> factory
+        Task<UserEntity?> GetOrCreateByEmailAsync(string email,  CancellationToken ct = default); //Func<UserEntity> factory,
+        Task SaveAsync(CancellationToken ct = default);
     }
 }

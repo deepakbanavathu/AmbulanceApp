@@ -45,8 +45,9 @@ namespace AmbulanceApp_DBContext.DBContext
                 entity.Property(e => e.UserId).IsRequired();
                 entity.HasOne(e => e.User).WithMany().HasForeignKey(e => e.UserId).OnDelete(DeleteBehavior.Cascade).HasConstraintName("FK_RefreshTokens_Users");
                 entity.Property(e => e.TokenHash).IsRequired().HasMaxLength(256);
+                entity.HasIndex(e => e.TokenHash).IsUnique();
                 entity.Property(e => e.ExpiresAt).IsRequired();
-                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("SYSUTCDATETIME()");
+                entity.Property(e => e.CreatedAt).IsRequired().HasDefaultValueSql("SYSUTCDATETIME()");                
                 entity.Property(e => e.RevokedAt);
                 entity.Property(e => e.ReplacedByToken).HasMaxLength(256);
                 entity.Property(e => e.IsRevoked).IsRequired().HasDefaultValue(false);

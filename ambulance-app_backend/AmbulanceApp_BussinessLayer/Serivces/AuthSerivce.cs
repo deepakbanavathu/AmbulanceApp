@@ -6,6 +6,8 @@ using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
 using Microsoft.AspNetCore.Http;
 using AmbulanceApp_DBContext.DBContract;
 using AmbulanceApp_BussinessLayer.Interfaces.SendReceiveOtp;
+using AmbulanceApp_BussinessLayer.Helpers;
+using AmbulanceApp_DBContext.Entities;
 
 namespace AmbulanceApp_BussinessLayer.Serivces
 {
@@ -29,7 +31,11 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> SendPhoneOtpAsync(PhoneLoginRequest req, HttpContext context)
         {
-            var otp = new Random(0).Next(100000, 999999).ToString();
+            if(string.IsNullOrWhiteSpace(req.Phone))
+                return new AuthResponse { Success = false, Message = "Phone number is required" };
+
+            var phone = UtilityHelpers.NormalizePhone(req.Phone);
+            var otp = UtilityHelpers.GenerateOtp();
             await _redisService.SetAsync($"otp:phone:{req.Phone}", otp,TimeSpan.FromMinutes(5));
 
             //Integrate SMS response
@@ -39,13 +45,18 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> VerifyPhoneOtpAsync(VerifyOtpRequest req, HttpContext context)
         {
-            var storedOtp = await _redisService.GetAsync($"otp:phone:{req.Contact}");
-            if (storedOtp == null || storedOtp != req.Otp)
+            if(string.IsNullOrWhiteSpace(req.Contact) || string.IsNullOrWhiteSpace(req.Otp))
+                return new AuthResponse { Success = false, Message = "Contact and Otp are required" };
+
+            var phone = UtilityHelpers.NormalizePhone(req.Contact);
+            var key = $"otp:phone:{phone}";
+            var storedOtp = await _redisService.GetAsync(key);
+            if (storedOtp is null || storedOtp != req.Otp)
                 return new AuthResponse { Success = false, Message = "Invalid Otp" };
 
-            await _redisService.RemoveAsync($"otp:phone:{req.Contact}");
+            await _redisService.RemoveAsync(key);
 
-            var user = await _user.GetOrCreateByPhoneAsync(req.Contact);
+            var user = await _user.GetOrCreateByPhoneAsync(phone);
 
             var accessToken = _jwtService.GenerateAccessToken(user.Id.ToString(),"User");
 
@@ -57,7 +68,10 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> LoginWithEmailAsync(EmailLoginRequest req, HttpContext context)
         {
-            var user = await _user.GetByEmailAsync(req.Email);
+            if(string.IsNullOrWhiteSpace(req.Email))
+                return new AuthResponse { Success = false, Message = "Email is required" };
+            var email = UtilityHelpers.NormalizeEmail(req.Email);
+            var user = await _user.GetByEmailAsync(email);
             if (user == null)
                 return new AuthResponse { Success = false, Message = "User not registerd" };
 
@@ -74,7 +88,12 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> SendEmailOtpAsync(EmailOtpRequest req, HttpContext context)
         {
-            var otp = new Random().Next(100000, 999999).ToString();
+            if(string.IsNullOrWhiteSpace(req.Email))
+                return new AuthResponse { Success = false, Message = "Email is required" };
+
+            var email = UtilityHelpers.NormalizeEmail(req.Email);
+            var otp = UtilityHelpers.GenerateOtp();
+           
             await _redisService.SetAsync($"otp:email:{req.Email}",otp,TimeSpan.FromMinutes(5));
 
             //implement the integrated email service
@@ -84,13 +103,18 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> VerifyEmailOtpAsync(VerifyOtpRequest req, HttpContext httpContext)
         {
-            var startOtp = await _redisService.GetAsync($"otp:email:{req.Contact}");
+            if(string.IsNullOrWhiteSpace(req.Contact) || string.IsNullOrWhiteSpace(req.Otp))
+                return new AuthResponse { Success = false, Message = "Contact and Otp are required" };
+            var email = UtilityHelpers.NormalizeEmail(req.Contact);
+            var key = $"otp:email:{email}";
+            var startOtp = await _redisService.GetAsync(key);
             if (startOtp == null || startOtp != req.Otp)
                 return new AuthResponse { Success = false, Message = "Invalid Otp" };
 
-            await _redisService.RemoveAsync($"otp:email:{req.Contact}");
+            await _redisService.RemoveAsync(key);
 
             var user = await _user.GetOrCreateByEmailAsync(req.Contact);
+            await _user.SaveAsync();
 
             var accessToken = _jwtService.GenerateAccessToken(user.Id.ToString(),"User");
             var refresh = _refreshTokenService.GenerateRefreshToken(user.Id.ToString());
@@ -102,6 +126,9 @@ namespace AmbulanceApp_BussinessLayer.Serivces
 
         public async Task<AuthResponse> RefreshTokenAsync(AmbulanceApp.Models.DTO.Request.RefreshRequest req, HttpContext context)
         {
+            if(string.IsNullOrWhiteSpace(req.RefreshToken))
+                return new AuthResponse { Success = false, Message = "Refresh token is required" };
+
             var hashed = _refreshTokenService.HashToken(req.RefreshToken);
             var storedValue = await _redisService.GetAsync($"refresh:{hashed}");
 
