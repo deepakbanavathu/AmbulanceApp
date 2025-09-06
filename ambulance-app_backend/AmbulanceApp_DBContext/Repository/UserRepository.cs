@@ -41,7 +41,7 @@ namespace AmbulanceApp_DBContext.Repository
             user.Id = user.Id == Guid.Empty ? Guid.NewGuid() : user.Id;
             user.Email = user.Email is null ? null : NormalizeEmail(user.Email);
             user.Phone = user.Phone is null ? null : NormalizePhone(user.Phone);
-            user.CreatedAt = user.CreatedAt == default ? DateTime.UtcNow : user.CreatedAt;
+            user.CreatedDt = user.CreatedDt == default ? DateTime.UtcNow : user.CreatedDt;
 
             _db.Users.Add(user);
             return Task.CompletedTask;
@@ -51,7 +51,7 @@ namespace AmbulanceApp_DBContext.Repository
         {
             user.Email = user.Email is null ? null : NormalizeEmail(user.Email);
             user.Phone = user.Phone is null ? null : NormalizePhone(user.Phone);
-            user.UpdateAt = DateTime.UtcNow;
+            user.UpdatedDt = DateTime.UtcNow;
 
             _db.Users.Update(user);
             return Task.CompletedTask;
@@ -69,12 +69,14 @@ namespace AmbulanceApp_DBContext.Repository
             var existing = await _db.Users.FirstOrDefaultAsync(u => u.Phone == norm, ct);
             if (existing != null) return existing;
 
+            var roles = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "User", ct);
+
             var entity = new UserEntity
             {
                 Phone = norm,
                 Id = Guid.NewGuid(),
-                RoleId = Guid.Empty,
-                CreatedAt = DateTime.UtcNow
+                RoleId = roles.Id,
+                CreatedDt = DateTime.UtcNow
             };
             
             _db.Users.Add(entity);
@@ -83,16 +85,18 @@ namespace AmbulanceApp_DBContext.Repository
 
         public async Task<UserEntity> GetOrCreateByEmailAsync(string email,CancellationToken ct = default) // Func<UserEntity> factory, 
         {
-            var norm = NormalizeEmail(email);
+            var norm =  NormalizeEmail(email);            
             var exsisting = await _db.Users.FirstOrDefaultAsync(u => u.Email == norm, ct);
             if (exsisting != null) return exsisting;
+
+            var roles = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "User", ct);
 
             var entity = new UserEntity
             {
                 Email = norm,
                 Id = Guid.NewGuid(),
-                RoleId = Guid.Empty,
-                CreatedAt = DateTime.UtcNow
+                RoleId = roles.Id,
+                CreatedDt = DateTime.UtcNow
             };          
 
             _db.Users.Add(entity);

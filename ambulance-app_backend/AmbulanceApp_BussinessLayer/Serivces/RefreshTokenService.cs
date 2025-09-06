@@ -1,6 +1,7 @@
 ﻿using AmbulanceApp.Models.Authentication;
 using AmbulanceApp_BussinessLayer.Interfaces.RedishCache;
 using AmbulanceApp_BussinessLayer.Interfaces.Tokengeneration;
+using AmbulanceApp_DBContext.DBContext;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace AmbulanceApp_BussinessLayer.Serivces
     public class RefreshTokenService : IRefreshToken
     {
         private readonly IRedisService _redis;
+        private readonly AmbulanceAppDBContext _db; 
 
-        public RefreshTokenService(IRedisService redis)
+        public RefreshTokenService(IRedisService redis, AmbulanceAppDBContext db)
         {
             _redis = redis;
+            _db = db;
         }       
 
         public RefreshToken GenerateRefreshToken(string userId, int daysValid = 30)
@@ -64,7 +67,7 @@ namespace AmbulanceApp_BussinessLayer.Serivces
                 _refreshToken.ExpiryDate
             });
 
-            await _redis.SetAsync(key, tokendata, ttl);
+            await _redis.SetAsync(key, tokendata, ttl);            
         }
 
         public async Task RevokeRefreshToken(string userId, string refreshToken)

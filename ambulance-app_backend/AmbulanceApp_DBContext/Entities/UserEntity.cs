@@ -19,8 +19,8 @@ namespace AmbulanceApp_DBContext.Entities
         [MaxLength(100)]
         public string? FullName { get; set; }
         public Guid RoleId { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? UpdateAt { get; set; }
+        public DateTime CreatedDt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedDt { get; set; }
         public Guid? UpdatedBy { get; set; }
     }
 }

@@ -23,26 +23,32 @@ namespace Ambulance.Api.Controllers
 
         [HttpPost("send-otp/phone")]
         public async Task<IActionResult> SendPhoneOtp([FromBody] PhoneLoginRequest req) =>
-            Ok(await _authService.SendPhoneOtpAsync(req, HttpContext));
+            (await _authService.SendPhoneOtpAsync(req, HttpContext)) is var resp && resp.Success
+            ?Ok(resp) : BadRequest(resp);
 
         [HttpPost("verify/phone")]
         public async Task<IActionResult> VerifyPhoneOtp([FromBody] VerifyOtpRequest req) =>
-            Ok(await _authService.VerifyPhoneOtpAsync(req, HttpContext));
+            (await _authService.VerifyPhoneOtpAsync(req, HttpContext)) is var resp && resp.Success
+            ? Ok(resp) : BadRequest(resp);
 
         [HttpPost("login/email")]
         public async Task<IActionResult> LoginWithEmail([FromBody] EmailLoginRequest req) =>
-            Ok(await _authService.LoginWithEmailAsync(req, HttpContext));
+            (await _authService.LoginWithEmailAsync(req, HttpContext)) is var resp  && resp.Success
+            ?Ok(resp) : BadRequest(resp);
 
         [HttpPost("send-otp/email")]
         public async Task<IActionResult> SendEmailotp([FromBody] EmailOtpRequest req) =>
-            Ok(await _authService.SendEmailOtpAsync(req, HttpContext));
+            (await _authService.SendEmailOtpAsync(req, HttpContext)) is var resp && resp.Success 
+            ?Ok(resp) : BadRequest(resp);
 
         [HttpPost("verify/email")]
         public async Task<IActionResult> verifyEmailOtp([FromBody] VerifyOtpRequest req) =>
-            Ok(await _authService.VerifyEmailOtpAsync(req, HttpContext));
+            (await _authService.VerifyEmailOtpAsync(req, HttpContext)) is var resp && resp.Success
+            ?Ok(resp) : BadRequest(resp);
 
         [HttpPost("Refresh")]
         public async Task<IActionResult> Refresh([FromBody] AmbulanceApp.Models.DTO.Request.RefreshRequest req) =>
-            Ok(await _authService.RefreshTokenAsync(req, HttpContext));        
+            (await _authService.RefreshTokenAsync(req, HttpContext)) is var resp && resp.Success
+            ?Ok(resp) : BadRequest(resp);        
     }
 }

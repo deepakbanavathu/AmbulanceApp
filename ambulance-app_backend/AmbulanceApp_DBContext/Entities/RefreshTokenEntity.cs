@@ -17,10 +17,11 @@ namespace AmbulanceApp_DBContext.Entities
         [MaxLength(256)]
         public string TokenHash { get; set; } = string.Empty!;
         public DateTime ExpiresAt { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedDt { get; set; } = DateTime.UtcNow;
         public DateTime? RevokedAt { get; set; }
-        public string? ReplacedByToken { get; set; }
+        public string? ReplacedByTokenHash { get; set; }
         public bool IsRevoked { get; set; } = false;
+        public Guid? DeviceId { get; set; }
         //public bool IsActive => RevokedAt == null && !IsExpired;
         //public bool IsExpired => DateTime.UtcNow >= ExpiresAt;
     }
